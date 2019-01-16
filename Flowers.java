@@ -1,9 +1,16 @@
-package com.polytech.projet.classes;
+package project;
+
+import java.awt.Point;
+import java.util.Arrays;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class Flowers {
-	private int x; 
-	private int y; 
-	private enum state {normal , carnivore , poisoned} ;
+	private Point position; 
+	protected enum Flowerstate {normal , carnivore , poisoned} ;
+	protected Flowerstate state ; 
 	private boolean isalive = true; 
 	private int pollen= 100; 
 	private String imagePath; 
@@ -13,48 +20,60 @@ public class Flowers {
 	public Flowers() {
 		
 	}
-
-
-
-	public Flowers(int x, int y, boolean isalive, int pollen, String imagePath) {
+	
+	
+	public Flowers(Point position, Flowerstate state, boolean isalive, int pollen, String imagePath) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.position = position;
+		this.state = state;
 		this.isalive = isalive;
 		this.pollen = pollen;
 		this.imagePath = imagePath;
 	}
 
 
+	public Flowers(Point position, boolean isalive, int pollen) {
+		super();
+		this.position = position;
+		this.isalive = isalive;
+		this.pollen = pollen;
+	}
+	
+	
+	
 
-	public int getX() {
-		return x;
+
+	public Flowers(Point position, Flowerstate state) {
+		
+		this.position = position;
+		this.state = state;
+	}
+	
+
+
+	public Flowerstate getState() {
+		return state;
 	}
 
 
-
-	public void setX(int x) {
-		this.x = x;
+	public void setState(Flowerstate state) {
+		this.state = state;
 	}
 
 
-
-	public int getY() {
-		return y;
+	public Point getPosition() {
+		return position;
 	}
 
 
-
-	public void setY(int y) {
-		this.y = y;
+	public void setPosition(Point position) {
+		this.position = position;
 	}
-
-
+	
 
 	public boolean isIsalive() {
 		return isalive;
 	}
-
 
 
 	public void setIsalive(boolean isalive) {
@@ -85,15 +104,40 @@ public class Flowers {
 		this.imagePath = imagePath;
 	}
 	
+	public static  Flowerstate getFirststate(){
+		List<Flowerstate> Values= Collections.unmodifiableList(Arrays.asList(Flowerstate.values()));
+		Random rand = new Random();
+		int n = rand.nextInt(Values.size());
+		return Values.get(n);
+	}
 	
-	public void décrementerPollen(int cap){ // décrémente le nombre de pollen d'une fleur  d'un nombre "cap"= capacité d'une abeille 
-		
-		int y = getPollen();
+	public int décrementerPollen(){ // décrémente le nombre de pollen d'une fleur  d'un nombre "cap"= capacité d'une abeille 
+		 int toStore = Math.min(Application.nectarPerFrame, this.pollen);
+				    this.pollen -= toStore;
+				    return toStore;
+				 
+		/*int y = getPollen();
 		if(y>0 ){
 			setPollen( y-cap);
-		}
+		}*/
 		
 	}
+
+
+	@Override
+	public String toString() {
+		return "Flowers [position=" + position + ", state=" + state + ", isalive=" + isalive + ", pollen=" + pollen
+				+ ", imagePath=" + imagePath + "]";
+	}
+
+
+	
+
+
+
+	
+	
+	
 	
 
 }
