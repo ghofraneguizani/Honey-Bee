@@ -1,4 +1,4 @@
-package project;
+package com.polytech.projet.classes;
 
 import java.awt.Frame;
 import java.awt.Point;
@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import project.Flowers.Flowerstate;
+import org.omg.Messaging.SyncScopeHelper;
 
+import com.polytech.projet.classes.Flowers.Flowerstate;
+import com.polytech.projet.classes.Forager.foragerState;
 
 public class Garden {
 	protected static ArrayList<Flowers> fleurs ;
@@ -17,7 +19,8 @@ public class Garden {
 
 	public Garden() {
 		fleurs = new ArrayList<>();
-		point =new Point();
+		ruche = new Hive();
+		//point =new Point();
 	}
 	
 	public Garden(Hive ruche) {
@@ -41,6 +44,7 @@ public class Garden {
 	}
 	
 	public Boolean existe(Point po){
+		
 		for (Flowers flower : fleurs) {
 			if(flower.getPosition().equals(po)){
 				return true;
@@ -57,10 +61,11 @@ public class Garden {
 	public void create(int nbFlowers,int width, int height){
 		boolean condition;
 		Flowers f; 
-		
+	
 		
 		for (int i = 0; i < nbFlowers; i++) {
-			point= getPosition(30,30);
+			point= getPosition(width,height);
+		
 			condition = existe(point);
 			if(condition){
 				point= getPosition(30,30);
@@ -76,7 +81,7 @@ public class Garden {
 			
 		}
 		
-	
+		
 			
 		
 	}

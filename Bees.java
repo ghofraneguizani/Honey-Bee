@@ -1,4 +1,4 @@
-package project;
+package com.polytech.projet.classes;
 
 public abstract class  Bees {
 	 

@@ -1,9 +1,8 @@
-package project;
+package com.polytech.projet.classes;
 
 import java.awt.Point;
 
-import project.Flowers.Flowerstate;
-
+import com.polytech.projet.classes.Flowers.Flowerstate;
 
 public class Forager extends Bees{
 	
@@ -13,12 +12,12 @@ public class Forager extends Bees{
 	private Flowers target ;
 	protected boolean isalive;
 	private Point position;
-	private Hive ruche;
+	private Hive laRuche;
 	private int pollen;
 	
 
 	public Forager() {
-		
+		//laRuche = new Hive();
 		isalive=true; 
 	}
 
@@ -28,13 +27,14 @@ public class Forager extends Bees{
 
 
 
-	public Forager(foragerState state, Flowers target, boolean isalive, Point position, int pollen) {
+	public Forager(foragerState state, Flowers target, boolean isalive, Point position, int pollen,Hive ruche ) {
 		super();
 		this.state = state;
 		this.target = target;
 		this.isalive = isalive;
 		this.position = position;
 		this.pollen = pollen;
+		this.laRuche = ruche;
 	}
 
 
@@ -107,8 +107,10 @@ public class Forager extends Bees{
 		
 	    switch(this.state) {
 	      case lookfor:
-	       // this.target = this.ruche.garden.fleurs.get( Math.floor(Math.random(0, this.ruche.garden.fleurs.size())));
-	    	  this.target=ruche.findFlower();
+	       // this.target = this.laRuche.garden.fleurs.get( Math.floor(Math.random(0, this.laRuche.garden.fleurs.size())));
+	    	
+	    	  this.setTarget(this.laRuche.findFlower());
+	    	
 	        if (this.target.isIsalive()) {
 	          this.state =foragerState.onway;
 	        }
@@ -123,7 +125,7 @@ public class Forager extends Bees{
 	        case collecting:
 	        	if(target.getState()== (Flowerstate.carnivore ) || target.getState()== (Flowerstate.poisoned)){
 	        		this.setIsalive(false);
-	        		ruche.lForager.remove(this);
+	        		laRuche.lForager.remove(this);
 	        	}
 	        	else {
 	        		int collected = this.target.décrementerPollen(); 
@@ -141,7 +143,7 @@ public class Forager extends Bees{
 	        
 	        
 	        case wayback:
-	          if (this.moveTo(this.ruche.positionHive)) this.state =foragerState.storing;
+	          if (this.moveTo(this.laRuche.positionHive)) this.state =foragerState.storing;
 	        break;
 	        
 	        

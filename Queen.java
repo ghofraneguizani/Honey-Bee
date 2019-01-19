@@ -1,4 +1,4 @@
-package project;
+package com.polytech.projet.classes;
 
 public class Queen extends Bees  {
 	private int minute;

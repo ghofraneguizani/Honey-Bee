@@ -1,4 +1,4 @@
-package project;
+package com.polytech.projet.classes;
 
 import java.awt.Point;
 import java.util.Arrays;

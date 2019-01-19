@@ -1,22 +1,22 @@
-package project;
+package com.polytech.projet.classes;
 
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import project.Forager.foragerState;
-
-
+import com.polytech.projet.classes.Flowers.Flowerstate;
+import com.polytech.projet.classes.Forager.foragerState;
 
 public class Hive {
 	private long pollen; 
-	protected static List<Forager> lForager ;
+	protected static ArrayList<Forager> lForager ;
 	protected Garden garden;
 	protected  Point positionHive ;
 
 	public Hive() {
 		lForager = new ArrayList<>();
+		
 	}
 	public Hive(long pollen,Point positionHive) {
 		this.pollen = pollen;
@@ -43,7 +43,7 @@ public class Hive {
 		return lForager;
 	}
 
-	public void setlForager(List<Forager> lForager) {
+	public void setlForager(ArrayList<Forager> lForager) {
 		this.lForager = lForager;
 	}
 	
@@ -57,16 +57,18 @@ public class Hive {
 		
 		for (int i = 0; i < nbBees; i++) {
 			fleur= findFlower();
-			Forager f = new Forager(foragerState.lookfor, fleur, true, new Point(0,0), 0);
+			Forager f = new Forager(foragerState.lookfor, fleur, true, new Point(0,0), 0,this);
 			lForager.add(f);
 		}
 	}
 	
 	public Flowers  findFlower(){// algo qui va retourner la position des fleurs 
-		int taille=Garden.fleurs.size();
+		
+		int taille= Garden.fleurs.size();
 		Random rand = new Random();
 		int n = rand.nextInt(taille-1);
 		return Garden.fleurs.get(n) ; 
+		
 	}
 	public void nextFrame(){
 		for (Forager forager : lForager) {
