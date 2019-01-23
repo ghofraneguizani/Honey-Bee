@@ -65,6 +65,22 @@ public class Forager extends Bees {
 		this.pollen = pollen;
 	}
 
+	public int getLiveTime() {
+		return liveTime;
+	}
+
+	public void setLiveTime(int liveTime) {
+		this.liveTime = liveTime;
+	}
+
+	public Point getPosition() {
+		return position;
+	}
+
+	public void setPosition(Point position) {
+		this.position = position;
+	}
+
 	public boolean isIsalive() {
 		return isalive;
 	}
@@ -74,6 +90,7 @@ public class Forager extends Bees {
 	}
 
 	public void fightOfForager(Forager input) { // pas teste encore
+		System.out.println("fight");
 		if (this.liveTime <= input.liveTime) {
 			ruche.getlForager().remove(input);
 		} else
@@ -81,6 +98,7 @@ public class Forager extends Bees {
 	}
 
 	public boolean moveTo(Point position) {
+		System.out.println("on the run");
 		boolean arrived = true;
 		if (position.x != this.position.x) {
 			arrived = false;
@@ -98,10 +116,7 @@ public class Forager extends Bees {
 	public void nextFrame() {
 		// lookfor , onway , collecting, wayback, storing
 
-		liveTime++; // l'abeille vieillit
-		if (liveTime > 45) {
-			ruche.getlForager().remove(this); // l'abeille meurt
-		}
+
 
 		switch (this.state) {
 		case lookfor:
@@ -109,9 +124,10 @@ public class Forager extends Bees {
 			// this.target = this.ruche.garden.fleurs.get( Math.floor(Math.random(0,
 			// this.ruche.garden.fleurs.size())));
 
-			target = ruche.findFlower();
+			if(this.target == null)  target = ruche.findFlower();
 			if (this.target.isIsalive()) {
 				this.state = foragerState.onway;
+				System.out.println(this);
 			}
 			break;
 
@@ -121,11 +137,17 @@ public class Forager extends Bees {
 			break;
 
 		case collecting:
-			for (int i = 0; i < ruche.getlForager().size(); i++) {
-				if (this.position == ruche.getlForager().get(i).position && !ruche.getlForager().get(i).equals(this)) {
-					this.fightOfForager(ruche.getlForager().get(i));
+			for (Forager forager : ruche.getlForager()) { // pas encore teste
+				if (this.position == forager.position && !forager.equals(this)) {
+					this.fightOfForager(forager);
 				}
 			}
+			// for (int i = 0; i < ruche.getlForager().size(); i++) { //deja teste
+			// if (this.position == ruche.getlForager().get(i).position &&
+			// !ruche.getlForager().get(i).equals(this)) {
+			// this.fightOfForager(ruche.getlForager().get(i));
+			// }
+			// }
 			if (target.getState() == (Flowerstate.carnivore) || target.getState() == (Flowerstate.poisoned)) {
 				this.setIsalive(false);
 				ruche.getlForager().remove(this);
@@ -137,6 +159,7 @@ public class Forager extends Bees {
 				target.setPollen(target.getPollen() - collected);
 				if (this.pollen >= Application.MaxNectar || collected == 0) {
 					this.state = foragerState.wayback;
+					this.setTarget(null);
 				}
 				if (target.getPollen() == 0) {
 					target.setIsalive(false);
@@ -157,6 +180,8 @@ public class Forager extends Bees {
 				this.state = foragerState.lookfor;
 			break;
 		}
+
+
 
 	}
 

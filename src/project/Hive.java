@@ -52,6 +52,7 @@ public class Hive {
 	}
 
 	public void createForagers(int nbBees) {
+		System.out.println("in the Hive, creating foragers");
 		Flowers fleur = new Flowers();
 
 		for (int i = 0; i < nbBees; i++) {
@@ -65,17 +66,26 @@ public class Hive {
 	public Flowers findFlower() {// algo qui va retourner la position des fleurs
 		int taille = Garden.fleurs.size();
 		Random rand = new Random();
-		int n = rand.nextInt(taille - 1); // je pense c'est pas taille-1, c'est taille (le-1 est automatique avec random
+		int n = rand.nextInt(taille /*- 1*/); // je pense c'est pas taille-1, c'est taille (le-1 est automatique avec
+												// random
 		return Garden.fleurs.get(n);
 	}
 
 	public void nextFrame() {
+		queen.createNewForager(); // nouvelle abeille
+
 		for (Forager forager : lForager) {
 			if (forager.isalive == true) {
 				forager.nextFrame();
 			}
 		}
-		queen.createNewForager(); // nouvelle abeille
+		for (int i=0;i<lForager.size();i++) {
+			lForager.get(i).setLiveTime(lForager.get(i).getLiveTime()+1); // l'abeille vieillit
+			if (lForager.get(i).getLiveTime() >= 45) {
+				this.getlForager().remove(lForager.get(i)); // l'abeille meurt
+			}
+		}
+		System.out.println(lForager.size());
 	}
 
 }

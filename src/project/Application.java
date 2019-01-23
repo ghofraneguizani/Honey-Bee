@@ -31,8 +31,8 @@ public class Application {
 	public void createApplication(int nbFlowers, int nbBees) {
 		// creation d'objet
 		garden.createFlowers(nbFlowers, frame.getWidth(), frame.getHeight());
-		garden.ruche.createForagers(nbBees);
 		garden.ruche = new Hive(garden, frame.getCenter());
+		garden.ruche.createForagers(nbBees);
 
 	}
 
@@ -50,12 +50,34 @@ public class Application {
 		int NbBees = as.nextInt();
 		as.close();
 		Application a = new Application();
-		a.frame = new Interface();
+		// a.frame = new Interface(); // not necessaire
 		a.createApplication(NbFlowers, NbBees);
-		while (!(NbFlowers == 0 || NbBees == 0)) {
+//		while (!(NbFlowers == 0 || NbBees == 0)) {
+//
+//			a.nextFrame();
+//		}
+		int counter = 0;
+		while (counter<100) {
 
 			a.nextFrame();
+			counter++;
 		}
+
+		// System.out.println("before fight:");
+		// for (Forager temp : a.garden.ruche.getlForager())
+		// System.out.println(temp);
+		// Forager f = a.garden.ruche.getlForager().get(0);
+		// for (int i = 0; i < a.garden.ruche.getlForager().size(); i++) {
+		// System.out.println("surch fight");
+		// if (f.getPosition() == a.garden.ruche.getlForager().get(i).getPosition() &&
+		// !a.garden.ruche.getlForager().get(i).equals(f)) {
+		// System.out.println("fight");
+		// f.fightOfForager(a.garden.ruche.getlForager().get(i));
+		// }
+		// }
+		// System.out.println("after fight");
+		// for (Forager temp : a.garden.ruche.getlForager())
+		// System.out.println(temp);
 
 		// Random rand = new Random();
 		// int n = rand.nextInt(3);

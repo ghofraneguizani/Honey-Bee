@@ -50,7 +50,7 @@ public class Garden {
 	}
 
 	public void createFlowers(int nbFlowers, int width, int height) {
-		System.out.println("ok");
+		System.out.println("in the garden, creating flowers");
 
 		boolean condition;
 		Flowers f;
