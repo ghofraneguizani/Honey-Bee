@@ -79,8 +79,8 @@ public class Hive {
 				forager.nextFrame();
 			}
 		}
-		for (int i=0;i<lForager.size();i++) {
-			lForager.get(i).setLiveTime(lForager.get(i).getLiveTime()+1); // l'abeille vieillit
+		for (int i = 0; i < lForager.size(); i++) {
+			lForager.get(i).setLiveTime(lForager.get(i).getLiveTime() + 1); // l'abeille vieillit
 			if (lForager.get(i).getLiveTime() >= 45) {
 				this.getlForager().remove(lForager.get(i)); // l'abeille meurt
 			}

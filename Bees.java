@@ -1,7 +1,6 @@
-package com.polytech.projet.classes;
+package project;
 
-public abstract class  Bees {
-	 
+public abstract class Bees {
 
 	public Bees() {
 		// TODO Auto-generated constructor stub

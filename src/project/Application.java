@@ -52,12 +52,12 @@ public class Application {
 		Application a = new Application();
 		// a.frame = new Interface(); // not necessaire
 		a.createApplication(NbFlowers, NbBees);
-//		while (!(NbFlowers == 0 || NbBees == 0)) {
-//
-//			a.nextFrame();
-//		}
+		// while (!(NbFlowers == 0 || NbBees == 0)) {
+		//
+		// a.nextFrame();
+		// }
 		int counter = 0;
-		while (counter<100) {
+		while (counter < 100) {
 
 			a.nextFrame();
 			counter++;

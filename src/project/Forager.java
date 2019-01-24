@@ -116,15 +116,14 @@ public class Forager extends Bees {
 	public void nextFrame() {
 		// lookfor , onway , collecting, wayback, storing
 
-
-
 		switch (this.state) {
 		case lookfor:
 
 			// this.target = this.ruche.garden.fleurs.get( Math.floor(Math.random(0,
 			// this.ruche.garden.fleurs.size())));
 
-			if(this.target == null)  target = ruche.findFlower();
+			if (this.target == null)
+				target = ruche.findFlower();
 			if (this.target.isIsalive()) {
 				this.state = foragerState.onway;
 				System.out.println(this);
@@ -180,8 +179,6 @@ public class Forager extends Bees {
 				this.state = foragerState.lookfor;
 			break;
 		}
-
-
 
 	}
 
