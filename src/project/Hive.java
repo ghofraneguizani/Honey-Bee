@@ -53,11 +53,11 @@ public class Hive {
 
 	public void createForagers(int nbBees) {
 		System.out.println("in the Hive, creating foragers");
-		Flowers fleur = new Flowers();
+//		Flowers fleur = new Flowers();
 
 		for (int i = 0; i < nbBees; i++) {
-			fleur = findFlower();
-			Forager f = new Forager(fleur, positionHive, this);
+//			fleur = findFlower();
+			Forager f = new Forager(null, new Point(positionHive), this);
 			System.out.println(f);
 			lForager.add(f);
 		}
@@ -73,11 +73,20 @@ public class Hive {
 
 	public void nextFrame() {
 		queen.createNewForager(); // nouvelle abeille
+		System.out.println("number of foragers (before loop): " + lForager.size());
 
+//		int counter = 1;
 		for (Forager forager : lForager) {
+			// for (int i = 0; i < lForager.size(); i++)
+			// System.out.println(counter);
 			if (forager.isalive == true) {
 				forager.nextFrame();
 			}
+//			counter++;
+		}
+		for (int i = 0; i < lForager.size(); i++) {
+			if (lForager.get(i).isalive == false)
+				this.getlForager().remove(lForager.get(i));
 		}
 		for (int i = 0; i < lForager.size(); i++) {
 			lForager.get(i).setLiveTime(lForager.get(i).getLiveTime() + 1); // l'abeille vieillit
@@ -85,7 +94,7 @@ public class Hive {
 				this.getlForager().remove(lForager.get(i)); // l'abeille meurt
 			}
 		}
-		System.out.println(lForager.size());
+		System.out.println("number of foragers (after loop): " + lForager.size());
 	}
 
 }

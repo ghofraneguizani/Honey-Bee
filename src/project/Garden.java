@@ -84,6 +84,13 @@ public class Garden {
 				fleurs.remove(fleurs.get(i));
 			}
 		}
+		for (int i = 0; i < fleurs.size(); i++) {
+			if (fleurs.get(i).getPollen() == 0) {
+				fleurs.get(i).setIsalive(false);
+			}
+			System.out.println("Pollen:" + fleurs.get(i).getPollen());
+		}
+		System.out.println("number of existing flowers:" + fleurs.size());
 		this.ruche.nextFrame();
 	}
 

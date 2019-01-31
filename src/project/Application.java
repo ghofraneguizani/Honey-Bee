@@ -1,10 +1,11 @@
 package project;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Application {
 
-	final static double vitesse = 0.04;// m/frame
+	final static double vitesse = 40;// m/frame
 	final static int nectarPerFrame = 1;
 	final static int MaxNectar = 10;
 
@@ -50,14 +51,17 @@ public class Application {
 		int NbBees = as.nextInt();
 		as.close();
 		Application a = new Application();
-		// a.frame = new Interface(); // not necessaire
+		// // a.frame = new Interface(); // not necessaire
 		a.createApplication(NbFlowers, NbBees);
 		// while (!(NbFlowers == 0 || NbBees == 0)) {
 		//
 		// a.nextFrame();
 		// }
 		int counter = 0;
-		while (counter < 100) {
+		while (true) {
+			System.out.println();
+			System.out.println("ROUND: " + counter);
+			System.out.println();
 
 			a.nextFrame();
 			counter++;
@@ -65,15 +69,18 @@ public class Application {
 
 		// System.out.println("before fight:");
 		// for (Forager temp : a.garden.ruche.getlForager())
-		// System.out.println(temp);
-		// Forager f = a.garden.ruche.getlForager().get(0);
+		// System.out.println(temp.getTarget());
+		// Forager f = a.garden.ruche.getlForager().get(4);
 		// for (int i = 0; i < a.garden.ruche.getlForager().size(); i++) {
-		// System.out.println("surch fight");
-		// if (f.getPosition() == a.garden.ruche.getlForager().get(i).getPosition() &&
-		// !a.garden.ruche.getlForager().get(i).equals(f)) {
-		// System.out.println("fight");
+		// System.out.println("surch fight"+i);
+		// if (f.getTarget() == a.garden.ruche.getlForager().get(i).getTarget()
+		// && !a.garden.ruche.getlForager().get(i).equals(f)) {
+		// System.out.println("fight begins");
 		// f.fightOfForager(a.garden.ruche.getlForager().get(i));
 		// }
+		// System.out.println("surching forager: "+f.getTarget());
+		// System.out.println("compared forager:
+		// "+a.garden.ruche.getlForager().get(i).getTarget());
 		// }
 		// System.out.println("after fight");
 		// for (Forager temp : a.garden.ruche.getlForager())

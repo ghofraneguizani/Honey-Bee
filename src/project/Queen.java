@@ -14,7 +14,7 @@ public class Queen extends Bees {
 			Flowers fleur = new Flowers();
 
 			fleur = ruche.findFlower();
-			Forager f = new Forager(fleur, ruche.positionHive, ruche);
+			Forager f = new Forager(fleur, ruche.getPositionHive(), ruche);
 			ruche.getlForager().add(f);
 		}
 		minute++;
