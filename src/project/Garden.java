@@ -91,6 +91,8 @@ public class Garden {
 			System.out.println("Pollen:" + fleurs.get(i).getPollen());
 		}
 		System.out.println("number of existing flowers:" + fleurs.size());
+		if (fleurs.size() == 0)
+			System.out.println("number of foragers in the game: " + this.ruche.getForagersAtAll());
 		this.ruche.nextFrame();
 	}
 

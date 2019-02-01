@@ -15,14 +15,14 @@ public class Forager extends Bees {
 	private Point position;
 	private Hive ruche;
 	private int pollen;
-	private int liveTime = 0;
+	private int liveTime;
 
 	public Forager() {
 
 		isalive = true;
 	}
 
-	public Forager(Flowers target, Point position, Hive ruche) {
+	public Forager(Flowers target, Point position, Hive ruche, int liveTime) {
 		super();
 		state = foragerState.lookfor;
 		this.target = target;
@@ -30,6 +30,7 @@ public class Forager extends Bees {
 		this.position = position;
 		this.pollen = 0;
 		this.ruche = ruche;
+		this.liveTime = liveTime;
 	}
 
 	public Forager(foragerState state, Flowers target, boolean isalive, Point position, int pollen) {
@@ -127,7 +128,9 @@ public class Forager extends Bees {
 		}
 		// if(this.getTarget()!=null) System.out.println("target
 		// :"+this.getTarget().getPosition());
-		// System.out.println("position of forager :"+this.getPosition());
+		if (this.target != null)
+			System.out
+					.println("position of forager :" + this.getPosition() + "flying to: " + this.target.getPosition());
 		return arrived;
 	}
 
@@ -141,6 +144,7 @@ public class Forager extends Bees {
 			// this.ruche.garden.fleurs.size())));
 
 			target = ruche.findFlower();
+			System.out.println("forager possition is: " + this.position);
 			System.out.println("forager target is:" + this.target.getPosition());
 			if (this.target.isIsalive()) {
 				this.state = foragerState.onway;
@@ -160,7 +164,7 @@ public class Forager extends Bees {
 
 		case collecting:
 			for (Forager forager : ruche.getlForager()) { // pas encore teste
-				if (this.getTarget() == forager.target && !forager.equals(this) && forager.isalive == true) {
+				if (forager.position.equals(this.position) && !forager.equals(this) && forager.isalive) {
 					this.fightOfForager(forager);
 				}
 			}
@@ -199,9 +203,11 @@ public class Forager extends Bees {
 			break;
 
 		case storing:
+			System.out.println("forager is storing");
 			int toStore = Math.min(Application.nectarPerFrame, this.pollen);
 			// this.pollen -= toStore;
 			setPollen(pollen - toStore);
+			this.ruche.setPollen(this.ruche.getPollen() + this.pollen);
 			if (this.pollen == 0) {
 				this.state = foragerState.lookfor;
 				System.out.println("forager state is:" + this.state);
@@ -214,7 +220,7 @@ public class Forager extends Bees {
 	@Override
 	public String toString() {
 		return "Forager [state=" + state + ", target=" + target + ", isalive=" + isalive + ", position=" + position
-				+ ", pollen=" + pollen + "]";
+				+ ", pollen=" + pollen + ", liveTime=" + liveTime + "]";
 	}
 
 }

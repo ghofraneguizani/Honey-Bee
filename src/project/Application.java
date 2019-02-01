@@ -53,34 +53,37 @@ public class Application {
 		Application a = new Application();
 		// // a.frame = new Interface(); // not necessaire
 		a.createApplication(NbFlowers, NbBees);
-		// while (!(NbFlowers == 0 || NbBees == 0)) {
-		//
-		// a.nextFrame();
-		// }
-		int counter = 0;
-		while (true) {
+		int counter = 1;
+		while (!(NbFlowers == 0 || NbBees == 0)) {
+
 			System.out.println();
 			System.out.println("ROUND: " + counter);
 			System.out.println();
-
 			a.nextFrame();
 			counter++;
 		}
+		// while (true) {
+		// System.out.println();
+		// System.out.println("ROUND: " + counter);
+		// System.out.println();
+		//
+		// a.nextFrame();
+		// counter++;
+		// }
 
 		// System.out.println("before fight:");
 		// for (Forager temp : a.garden.ruche.getlForager())
-		// System.out.println(temp.getTarget());
+		// System.out.println(temp.getPosition());
 		// Forager f = a.garden.ruche.getlForager().get(4);
-		// for (int i = 0; i < a.garden.ruche.getlForager().size(); i++) {
-		// System.out.println("surch fight"+i);
-		// if (f.getTarget() == a.garden.ruche.getlForager().get(i).getTarget()
-		// && !a.garden.ruche.getlForager().get(i).equals(f)) {
+		// for (Forager forager : a.garden.ruche.getlForager()) {
+		// System.out.println("surch fight"+counter);
+		// if ( f.getPosition().equals(forager.getPosition())
+		// && !f.equals(forager)) {
 		// System.out.println("fight begins");
-		// f.fightOfForager(a.garden.ruche.getlForager().get(i));
+		// f.fightOfForager(forager);
 		// }
-		// System.out.println("surching forager: "+f.getTarget());
-		// System.out.println("compared forager:
-		// "+a.garden.ruche.getlForager().get(i).getTarget());
+		// System.out.println("surching forager: "+f.getPosition());
+		// System.out.println("compared forager: "+forager.getPosition());
 		// }
 		// System.out.println("after fight");
 		// for (Forager temp : a.garden.ruche.getlForager())

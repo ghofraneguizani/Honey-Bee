@@ -1,5 +1,7 @@
 package project;
 
+import java.awt.Point;
+
 public class Queen extends Bees {
 	private int minute;
 	private Hive ruche;
@@ -14,8 +16,9 @@ public class Queen extends Bees {
 			Flowers fleur = new Flowers();
 
 			fleur = ruche.findFlower();
-			Forager f = new Forager(fleur, ruche.getPositionHive(), ruche);
+			Forager f = new Forager(fleur, new Point(ruche.getPositionHive()), ruche, 0);
 			ruche.getlForager().add(f);
+			this.ruche.setForagersAtAll(this.ruche.getForagersAtAll() + 1);
 		}
 		minute++;
 	}
