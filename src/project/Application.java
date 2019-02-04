@@ -54,7 +54,7 @@ public class Application {
 		// // a.frame = new Interface(); // not necessaire
 		a.createApplication(NbFlowers, NbBees);
 		int counter = 1;
-		while (!(NbFlowers == 0 || NbBees == 0)) {
+		while (!(a.garden.getFleurs().size() == 0 || a.garden.ruche.getlForager().size() == 0)) {
 
 			System.out.println();
 			System.out.println("ROUND: " + counter);
@@ -62,7 +62,7 @@ public class Application {
 			a.nextFrame();
 			counter++;
 		}
-		// while (true) {
+		// while (counter<50) {
 		// System.out.println();
 		// System.out.println("ROUND: " + counter);
 		// System.out.println();

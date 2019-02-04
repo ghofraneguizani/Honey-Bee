@@ -27,6 +27,30 @@ public class Garden {
 		fleurs.add(f);
 	}
 
+	public static ArrayList<Flowers> getFleurs() {
+		return fleurs;
+	}
+
+	public static void setFleurs(ArrayList<Flowers> fleurs) {
+		Garden.fleurs = fleurs;
+	}
+
+	public Hive getRuche() {
+		return ruche;
+	}
+
+	public void setRuche(Hive ruche) {
+		this.ruche = ruche;
+	}
+
+	public Point getPoint() {
+		return point;
+	}
+
+	public void setPoint(Point point) {
+		this.point = point;
+	}
+
 	public Point getPosition(int width, int height) {
 		Point p;
 		Random rand = new Random();
@@ -79,21 +103,25 @@ public class Garden {
 	}
 
 	public void nextFrame() {// minuteSuivante
-		for (int i = 0; i < fleurs.size(); i++) {
-			if (!fleurs.get(i).isIsalive()) {
-				fleurs.remove(fleurs.get(i));
-			}
-		}
+		this.ruche.nextFrame();
+
 		for (int i = 0; i < fleurs.size(); i++) {
 			if (fleurs.get(i).getPollen() == 0) {
 				fleurs.get(i).setIsalive(false);
 			}
 			System.out.println("Pollen:" + fleurs.get(i).getPollen());
 		}
+		for (int i = fleurs.size() - 1; i >= 0; i--) {
+			if (!fleurs.get(i).isIsalive()) {
+				fleurs.remove(fleurs.get(i));
+			}
+		}
 		System.out.println("number of existing flowers:" + fleurs.size());
-		if (fleurs.size() == 0)
+		if (fleurs.size() == 0) {
 			System.out.println("number of foragers in the game: " + this.ruche.getForagersAtAll());
-		this.ruche.nextFrame();
+			System.out.println("number of collected pollen: " + this.ruche.getPollen());
+		}
+
 	}
 
 }

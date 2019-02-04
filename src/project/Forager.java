@@ -164,17 +164,12 @@ public class Forager extends Bees {
 
 		case collecting:
 			for (Forager forager : ruche.getlForager()) { // pas encore teste
-				if (forager.position.equals(this.position) && !forager.equals(this) && forager.isalive) {
+				if (forager.position.equals(this.position) && !forager.equals(this) && forager.isalive
+						&& this.isalive) {
 					this.fightOfForager(forager);
 				}
 			}
-			// for (int i = 0; i < ruche.getlForager().size(); i++) { // deja teste
-			// System.out.println("check if there is another forager");
-			// if (this.target == ruche.getlForager().get(i).getTarget() &&
-			// !ruche.getlForager().get(i).equals(this)) {
-			// this.fightOfForager(ruche.getlForager().get(i));
-			// }
-			// }
+
 			if (target.getState() == (Flowerstate.carnivore) || target.getState() == (Flowerstate.poisoned)) {
 				System.out.println("forager is in DANGER");
 				this.setIsalive(false);
@@ -185,7 +180,7 @@ public class Forager extends Bees {
 				int collected = this.target.decrementerPollen();
 				this.setPollen(collected + pollen);
 				// this.pollen += collected;
-				target.setPollen(target.getPollen() - collected);
+				// target.setPollen(target.getPollen() - collected); // c'est deux fois
 				if (this.pollen >= Application.MaxNectar || collected == 0) {
 					this.state = foragerState.wayback;
 					System.out.println("forager state is:" + this.state);
@@ -203,11 +198,13 @@ public class Forager extends Bees {
 			break;
 
 		case storing:
-			System.out.println("forager is storing");
+			System.out.println("forager is storing, her number of pollen is: " + this.pollen);
 			int toStore = Math.min(Application.nectarPerFrame, this.pollen);
+			System.out.println("int toStore is: " + toStore);
 			// this.pollen -= toStore;
 			setPollen(pollen - toStore);
-			this.ruche.setPollen(this.ruche.getPollen() + this.pollen);
+			this.ruche.setPollen(this.ruche.getPollen() + toStore);
+			System.out.println("ruche pollen is: " + this.ruche.getPollen());
 			if (this.pollen == 0) {
 				this.state = foragerState.lookfor;
 				System.out.println("forager state is:" + this.state);

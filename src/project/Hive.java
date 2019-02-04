@@ -90,7 +90,7 @@ public class Hive {
 	}
 
 	public void nextFrame() {
-		queen.createNewForager(); // nouvelle abeille
+		queen.nextFrame(); // nouvelle abeille
 		System.out.println("number of foragers (before loop): " + lForager.size());
 
 		// int counter = 1;
@@ -102,11 +102,11 @@ public class Hive {
 			}
 			// counter++;
 		}
-		for (int i = 0; i < lForager.size(); i++) {
+		for (int i = lForager.size() - 1; i >= 0; i--) {
 			if (lForager.get(i).isalive == false)
 				this.getlForager().remove(lForager.get(i));
 		}
-		for (int i = 0; i < lForager.size(); i++) {
+		for (int i = lForager.size() - 1; i >= 0; i--) {
 			lForager.get(i).setLiveTime(lForager.get(i).getLiveTime() + 1); // l'abeille vieillit
 			if (lForager.get(i).getLiveTime() >= 45) {
 				this.getlForager().remove(lForager.get(i)); // l'abeille meurt
