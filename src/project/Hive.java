@@ -8,11 +8,13 @@ import java.util.Random;
 public class Hive {
 	private long pollen;
 	protected static List<Forager> lForager;
+	private int maxLiveTimeForager = 500;
+
 	protected Garden garden;
 	protected Point positionHive;
-	private Queen queen; // pour les abeilles
+	private Queen queen; 			// pour les abeilles
 
-	private int foragersAtAll;
+	private int foragersAtAll;			//une variable pour voir à la fin du jeu combien d'abeilles étaient dans le jeu au total
 
 	public Hive() {
 		lForager = new ArrayList<>();
@@ -61,19 +63,17 @@ public class Hive {
 		setPollen(getPollen() + cap);
 	}
 
-	public int getRandomLiveTime() {
+	public int getRandomLiveTime() {				//un nombre aléatoire, de sorte qu'au début toutes les abeilles n'ont pas le même âge
 		Random rand = new Random();
-		int output = rand.nextInt(40);
+		int output = rand.nextInt(this.maxLiveTimeForager/2);
 		return output;
 	}
 
-	public void createForagers(int nbBees) {
+	public void createForagers(int nbBees) {					//la méthode pour commencer à créer les abeilles
 		System.out.println("in the Hive, creating foragers");
-		// Flowers fleur = new Flowers();
 
 		for (int i = 0; i < nbBees; i++) {
 			int liveTime = this.getRandomLiveTime();
-			// fleur = findFlower();
 			Forager f = new Forager(null, new Point(positionHive), this, liveTime);
 			System.out.println(f);
 			lForager.add(f);
@@ -81,39 +81,38 @@ public class Hive {
 		}
 	}
 
-	public Flowers findFlower() {// algo qui va retourner la position des fleurs
+	public Flowers findFlower() {		// algo qui va retourner la position des fleurs
 		int taille = Garden.fleurs.size();
 		Random rand = new Random();
-		int n = rand.nextInt(taille /*- 1*/); // je pense c'est pas taille-1, c'est taille (le-1 est automatique avec
-												// random
+		int n = rand.nextInt(taille); 
 		return Garden.fleurs.get(n);
 	}
 
 	public void nextFrame() {
-		queen.nextFrame(); // nouvelle abeille
+		queen.nextFrame(); 		
 		System.out.println("number of foragers (before loop): " + lForager.size());
 
-		// int counter = 1;
 		for (Forager forager : lForager) {
-			// for (int i = 0; i < lForager.size(); i++)
-			// System.out.println(counter);
 			if (forager.isalive == true) {
 				forager.nextFrame();
 			}
-			// counter++;
-		}
-		for (int i = lForager.size() - 1; i >= 0; i--) {
+		}		
+		for (int i = lForager.size() - 1; i >= 0; i--) {    	//retirer les abeilles mortes de la liste
 			if (lForager.get(i).isalive == false)
 				this.getlForager().remove(lForager.get(i));
 		}
-		for (int i = lForager.size() - 1; i >= 0; i--) {
+		for (int i = lForager.size() - 1; i >= 0; i--) {		//retirer les abeilles mortes de la liste
 			lForager.get(i).setLiveTime(lForager.get(i).getLiveTime() + 1); // l'abeille vieillit
-			if (lForager.get(i).getLiveTime() >= 45) {
-				this.getlForager().remove(lForager.get(i)); // l'abeille meurt
+			if (lForager.get(i).getLiveTime() >= this.maxLiveTimeForager) {
+				this.getlForager().remove(lForager.get(i)); 
 			}
 		}
 		System.out.println("number of foragers (after loop): " + lForager.size());
 		System.out.println("collected Pollen: " + this.pollen);
+		if (lForager.size() == 0) {										//afficher les résultats à la fin de la jeu (il ne reste plus des abeilles) 
+			System.out.println("number of foragers in the game: " + this.getForagersAtAll());
+			System.out.println("number of collected pollen: " + this.getPollen());
+		}
 	}
 
 }

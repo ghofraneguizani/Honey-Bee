@@ -10,7 +10,7 @@ import java.util.Random;
 public class Flowers {
 	private Point position;
 
-	protected enum Flowerstate {
+	protected enum Flowerstate {				//les états individuels d'une fleur
 		normal, carnivore, poisoned
 	};
 
@@ -90,8 +90,9 @@ public class Flowers {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-
-	public static Flowerstate getFirststate() {
+	
+	//on utilise ca?
+	public static Flowerstate getFirststate() {					
 		List<Flowerstate> Values = Collections.unmodifiableList(Arrays.asList(Flowerstate.values()));
 		Random rand = new Random();
 		int n = rand.nextInt(Values.size());
