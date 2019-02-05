@@ -51,7 +51,7 @@ public class Garden {
 		this.point = point;
 	}
 
-	public Point getPosition(int width, int height) {		//créer un point aléatoire
+	public Point getPosition(int width, int height) { // créer un point aléatoire
 		Point p;
 		Random rand = new Random();
 		int x = rand.nextInt(width);
@@ -60,7 +60,7 @@ public class Garden {
 		return p;
 	}
 
-	public Boolean existe(Point po) {						//vérifier s'il y a déjà une fleur sur ce point
+	public Boolean existe(Point po) { // vérifier s'il y a déjà une fleur sur ce point
 		for (Flowers flower : fleurs) {
 			if (flower.getPosition().equals(po)) {
 				return true;
@@ -73,16 +73,16 @@ public class Garden {
 		return (nbFlowers / 10);
 	}
 
-	public void createFlowers(int nbFlowers, int width, int height) {		//créer les fleures
+	public void createFlowers(int nbFlowers, int width, int height) { // créer les fleures
 		System.out.println("in the garden, creating flowers");
 
 		boolean condition;
 		Flowers f;
 
-		for (int i = 0; i < nbFlowers; i++) {		 		//les bouclages pour les fleures
-			point = getPosition(width, height);				//trouver un poit aléatoire
+		for (int i = 0; i < nbFlowers; i++) { // les bouclages pour les fleures
+			point = getPosition(width, height); // trouver un poit aléatoire
 			boolean runWhile = true;
-			while (runWhile) {								//les bouclages pour vérifier le point nouveaux
+			while (runWhile) { // les bouclages pour vérifier le point nouveaux
 				condition = existe(point);
 				if (condition) {
 					point = getPosition(width, height);
@@ -93,7 +93,7 @@ public class Garden {
 			fleurs.add(f);
 		}
 
-		int s = getState(nbFlowers);							//fixer le pourcentage de fleurs mortelles
+		int s = getState(nbFlowers); // fixer le pourcentage de fleurs mortelles
 		for (int i = 0; i < s; i = i + 2) {
 			fleurs.get(i).setState(Flowerstate.carnivore);
 			fleurs.get(i + 1).setState(Flowerstate.poisoned);
@@ -105,19 +105,19 @@ public class Garden {
 	public void nextFrame() {// minuteSuivante
 		this.ruche.nextFrame();
 
-		for (int i = 0; i < fleurs.size(); i++) {			//vérifier si une fleure n'a pas encore de pollen	
+		for (int i = 0; i < fleurs.size(); i++) { // vérifier si une fleure n'a pas encore de pollen
 			if (fleurs.get(i).getPollen() == 0) {
 				fleurs.get(i).setIsalive(false);
 			}
 			System.out.println("Pollen:" + fleurs.get(i).getPollen());
 		}
-		for (int i = fleurs.size() - 1; i >= 0; i--) {			//supprimer les fleurs mortes de la liste
+		for (int i = fleurs.size() - 1; i >= 0; i--) { // supprimer les fleurs mortes de la liste
 			if (!fleurs.get(i).isIsalive()) {
 				fleurs.remove(fleurs.get(i));
 			}
 		}
 		System.out.println("number of existing flowers:" + fleurs.size());
-		if (fleurs.size() == 0) {										//afficher les résultats à la fin de la jeu (il ne reste plus de fleurs) 
+		if (fleurs.size() == 0) { // afficher les résultats à la fin de la jeu (il ne reste plus de fleurs)
 			System.out.println("number of foragers in the game: " + this.ruche.getForagersAtAll());
 			System.out.println("number of collected pollen: " + this.ruche.getPollen());
 		}

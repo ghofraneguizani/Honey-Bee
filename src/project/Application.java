@@ -3,7 +3,7 @@ package project;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Application extends Thread{
+public class Application extends Thread {
 
 	final static double vitesse = 1;// m/frame
 	final static int nectarPerFrame = 1;
@@ -54,21 +54,21 @@ public class Application extends Thread{
 		// // a.frame = new Interface(); // not necessaire
 		a.createApplication(NbFlowers, NbBees);
 		int counter = 1;
-//		while (a.garden.getFleurs().size() != 0 && a.garden.ruche.getlForager().size() != 0) {
+		while (a.garden.getFleurs().size() != 0 && a.garden.ruche.getlForager().size() != 0) {
 
-		while(counter<20) {
+			// while (counter < 20) {
 			System.out.println();
 			System.out.println("ROUND: " + counter);
 			System.out.println();
 			a.nextFrame();
-//			dessiner(a);
-//			try {
-//				a.wait(40);			
-//			} catch (Exception e) {
-//				// TODO: handle exception
-//				System.out.println("ok");
-//			}
-			
+			// dessiner(a);
+			// try {
+			// a.wait(40);
+			// } catch (Exception e) {
+			// // TODO: handle exception
+			// System.out.println("ok");
+			// }
+
 			counter++;
 		}
 		// while (counter<50) {

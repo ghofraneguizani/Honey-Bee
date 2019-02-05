@@ -5,12 +5,12 @@ import project.Flowers.Flowerstate;
 
 public class Forager extends Bees {
 
-	protected enum foragerState {						//les états individuels d'une abeille
+	protected enum foragerState { // les états individuels d'une abeille
 		lookfor, onway, collecting, wayback, storing
 	};
 
 	private foragerState state;
-	private Flowers target;							//la fleur vers laquelle elle veut voler ensuite
+	private Flowers target; // la fleur vers laquelle elle veut voler ensuite
 	protected boolean isalive;
 	private Point position;
 	private Hive ruche;
@@ -90,7 +90,8 @@ public class Forager extends Bees {
 		this.isalive = isalive;
 	}
 
-	public void fightOfForager(Forager input) { 	//Le combat qui a lieu lorsque deux abeilles ont volé vers la même fleur (la plus jeune gagne)
+	public void fightOfForager(Forager input) { // Le combat qui a lieu lorsque deux abeilles ont volé vers la même
+												// fleur (la plus jeune gagne)
 		System.out.println("in fight method");
 		if (this.liveTime <= input.liveTime) {
 			for (Forager f : ruche.getlForager()) {
@@ -111,7 +112,7 @@ public class Forager extends Bees {
 		}
 	}
 
-	public boolean moveTo(Point position) {					//la méthode de déplacement des abeilles
+	public boolean moveTo(Point position) { // la méthode de déplacement des abeilles
 		System.out.println("forager is in the moveTo method");
 		boolean arrived = true;
 		if (position.x != this.position.x) {
@@ -127,8 +128,10 @@ public class Forager extends Bees {
 			this.position.y += (distance > 0 ? 1 : -1) * Math.min(Application.vitesse, Math.abs(distance));
 		}
 		if (this.target != null)
-			System.out.println("position of forager :" + this.getPosition() + "flying to: " + this.target.getPosition());
-		else System.out.println("forager is on the way back:" + this.getPosition());
+			System.out
+					.println("position of forager :" + this.getPosition() + "flying to: " + this.target.getPosition());
+		else
+			System.out.println("forager is on the way back:" + this.getPosition());
 		return arrived;
 	}
 
@@ -136,7 +139,7 @@ public class Forager extends Bees {
 		// lookfor , onway , collecting, wayback, storing
 
 		switch (this.state) {
-		case lookfor:					//l'abeille cherche une fleur
+		case lookfor: // l'abeille cherche une fleur
 
 			target = ruche.findFlower();
 			System.out.println("forager possition is: " + this.position);
@@ -147,7 +150,7 @@ public class Forager extends Bees {
 			}
 			break;
 
-		case onway:						//l'abeille vole jusqu'à la fleur
+		case onway: // l'abeille vole jusqu'à la fleur
 
 			if (this.moveTo(this.target.getPosition())) {
 				this.state = foragerState.collecting;
@@ -155,18 +158,18 @@ public class Forager extends Bees {
 			}
 			break;
 
-		case collecting:				//l'abeille collecte le pollen
-			for (Forager forager : ruche.getlForager()) { 		//vérifier s'il y a une autre abeille sur la même fleur
+		case collecting: // l'abeille collecte le pollen
+			for (Forager forager : ruche.getlForager()) { // vérifier s'il y a une autre abeille sur la même fleur
 				if (forager.position.equals(this.position) && !forager.equals(this) && forager.isalive
 						&& this.isalive) {
-					this.fightOfForager(forager);  		//Combat pour la fleur
+					this.fightOfForager(forager); // Combat pour la fleur
 				}
 			}
 
 			if (target.getState() == (Flowerstate.carnivore) || target.getState() == (Flowerstate.poisoned)) {
 				System.out.println("forager is in DANGER");
-				this.setIsalive(false);				//l'abeille est morte
-				target.setIsalive(false); 			// la fleur est morte
+				this.setIsalive(false); // l'abeille est morte
+				target.setIsalive(false); // la fleur est morte
 			} else {
 				System.out.println("forager is collecting");
 				int collected = this.target.decrementerPollen();
@@ -180,14 +183,14 @@ public class Forager extends Bees {
 			}
 			break;
 
-		case wayback:						//l'abeille retourne à la ruche
+		case wayback: // l'abeille retourne à la ruche
 			if (this.moveTo(this.ruche.getPositionHive())) {
 				this.state = foragerState.storing;
 				System.out.println("forager state is:" + this.state);
 			}
 			break;
 
-		case storing:   			//l'abeille stocke le pollen dans la ruche
+		case storing: // l'abeille stocke le pollen dans la ruche
 			System.out.println("forager is storing, her number of pollen is: " + this.pollen);
 			int toStore = Math.min(Application.nectarPerFrame, this.pollen);
 			System.out.println("int toStore is: " + toStore);
