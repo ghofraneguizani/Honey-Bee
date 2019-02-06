@@ -81,6 +81,7 @@ public class Interface extends JFrame {
 
 	public void draw() {
 
+		//to do
 	}
 
 	public Point getCenter() {
@@ -103,13 +104,17 @@ public class Interface extends JFrame {
 			super.paintComponent(g);
 
 			String fichier = "img/menu.png";
+			String bees = "img/bee1.jpg";
 			System.out.println(fichier);
 			FontMetrics fm = g.getFontMetrics(); // necessaire???
 
 			try {
 				BufferedImage img = ImageIO.read(new File(fichier));
-				g.drawImage(img, 30, 30, 100, 173, null);
+				BufferedImage imgBees = ImageIO.read(new File(bees));
 
+//				g.drawImage(img, 30, 30, 100, 173, null);
+
+//				g.drawImage(imgBees, this.getC, positionY, 50, 50, null);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}

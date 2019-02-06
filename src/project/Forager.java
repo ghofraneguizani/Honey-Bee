@@ -16,6 +16,8 @@ public class Forager extends Bees {
 	private Hive ruche;
 	private int pollen;
 	private int liveTime;
+	
+	String imagePath = new String("img/bee.gif");
 
 	public Forager() {
 

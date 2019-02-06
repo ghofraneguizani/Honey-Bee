@@ -44,33 +44,39 @@ public class Application extends Thread {
 
 	public static void main(String[] args) {
 
-		System.out.println("donner le nombre de Fleurs ? ");
-		Scanner as = new Scanner(System.in);
-		int NbFlowers = as.nextInt();
-		System.out.println("donner le nombre d'abeilles? ");
-		int NbBees = as.nextInt();
-		as.close();
-		Application a = new Application();
-		// // a.frame = new Interface(); // not necessaire
-		a.createApplication(NbFlowers, NbBees);
-		int counter = 1;
-		while (a.garden.getFleurs().size() != 0 && a.garden.ruche.getlForager().size() != 0) {
+//		System.out.println("donner le nombre de Fleurs ? ");
+//		Scanner as = new Scanner(System.in);
+//		int NbFlowers = as.nextInt();
+//		System.out.println("donner le nombre d'abeilles? ");
+//		int NbBees = as.nextInt();
+//		as.close();
+//		Application a = new Application();
+//		// a.frame = new Interface(); // not necessaire
+//		a.createApplication(NbFlowers, NbBees);
+//		int counter = 1;
+//		while (a.garden.getFleurs().size() != 0 && a.garden.ruche.getlForager().size() != 0) {
+//
+////			while (counter < 20) {
+//			System.out.println();
+//			System.out.println("ROUND: " + counter);
+//			System.out.println();
+//			a.nextFrame();
+//			 //dessiner(a);
+//			 try {
+//			 a.wait(40);
+//			 System.out.println("has waited");
+//			 } catch (Exception e) {
+//			 // TODO: handle exception
+//			 System.out.println("has not waited");
+//			 }
+//
+//			counter++;
+//		}
+			
+			
+			
+		AnimatedFrame frame1 = new AnimatedFrame();
 
-			// while (counter < 20) {
-			System.out.println();
-			System.out.println("ROUND: " + counter);
-			System.out.println();
-			a.nextFrame();
-			// dessiner(a);
-			// try {
-			// a.wait(40);
-			// } catch (Exception e) {
-			// // TODO: handle exception
-			// System.out.println("ok");
-			// }
-
-			counter++;
-		}
 		// while (counter<50) {
 		// System.out.println();
 		// System.out.println("ROUND: " + counter);
