@@ -64,27 +64,27 @@ public class MakeChoices extends JFrame {
 			contentPane.add(panel);
 			
 			
-			JLabel label1 = new JLabel("Entrez le nombre d'abeilles");
+			JLabel label1 = new JLabel("Entrez le nombre d'abeilles (500 max)");
 			label1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			label1.setBounds(600, 300, 349, 62);
+			label1.setBounds(600, 300, 390, 62);
 			label1.setFont(new Font("Ancient", Font.PLAIN, 20));
 			label1.setForeground(Color.white);
 			
 		
-			JLabel label2 = new JLabel("Entrez le nombre de fleurs");
+			JLabel label2 = new JLabel("Entrez le nombre de fleurs (500 max)");
 			label2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			label2.setBounds(600, 400, 349, 62);
+			label2.setBounds(600, 400, 390, 62);
 			label2.setFont(new Font("Ancient", Font.PLAIN, 20));
 			label2.setForeground(Color.white);
 			
 			JTextField text1 = new JTextField(10);
 			text1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			text1.setBounds(600, 450, 349, 62);
+			text1.setBounds(600, 450, 390, 62);
 			text1.setFont(new Font("Ancient", Font.PLAIN, 40));
 			
 			JTextField text2= new JTextField(10);
 			text2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			text2.setBounds(600, 350, 349, 62);
+			text2.setBounds(600, 350, 390, 62);
 			text2.setFont(new Font("Ancient", Font.PLAIN, 40));
 
 			JButton b2 = new JButton();
@@ -103,6 +103,22 @@ public class MakeChoices extends JFrame {
 					//dispose();
 					nbFleurs= Integer.parseInt(text1.getText());
 					nbBees =Integer.parseInt(text2.getText());
+					if(nbFleurs>500 && nbBees>=500) {
+						text1.setText("");
+						text2.setText("");
+						nbFleurs = (Integer) null;
+						nbBees = (Integer) null;
+					}
+					if (nbFleurs>500) {
+						text1.setText("");
+						nbFleurs = (Integer) null;
+					}
+					else if (nbBees>500) {
+						text2.setText("");
+						nbBees = (Integer) null;
+					}
+	
+					// to do check for Integers
 					Application a = new Application();
 					a.create(nbFleurs, nbBees);
 				

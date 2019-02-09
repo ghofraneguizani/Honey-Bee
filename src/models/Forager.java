@@ -142,9 +142,7 @@ public class Forager extends Bees {
 		}
 		// if(this.getTarget()!=null) System.out.println("target
 		// :"+this.getTarget().getPosition());
-		if (this.target != null)
-			System.out
-					.println("position of forager :" + this.getPosition() + "flying to: " + this.target.getPosition());
+//		if (this.target != null) System.out.println("position of forager :" + this.getPosition() + "flying to: " + this.target.getPosition());
 		return arrived;
 	}
 
@@ -158,11 +156,11 @@ public class Forager extends Bees {
 			// this.ruche.garden.fleurs.size())));
 
 			target = ruche.findFlower();
-			System.out.println("forager possition is: " + this.position);
-			System.out.println("forager target is:" + this.target.getPosition());
+//			System.out.println("forager possition is: " + this.position);
+//			System.out.println("forager target is:" + this.target.getPosition());
 			if (this.target.isIsalive()) {
 				this.state = foragerState.onway;
-				System.out.println("forager state is:" + this.state);
+//				System.out.println("forager state is:" + this.state);
 			}
 			break;
 
@@ -172,7 +170,7 @@ public class Forager extends Bees {
 			// System.out.println("position of forager is:" + this.position);
 			if (this.moveTo(this.target.getPosition())) {
 				this.state = foragerState.collecting;
-				System.out.println("forager state is:" + this.state);
+//				System.out.println("forager state is:" + this.state);
 			}
 			break;
 
@@ -185,19 +183,19 @@ public class Forager extends Bees {
 			}
 
 			if (target.getState() == (Flowerstate.carnivore) || target.getState() == (Flowerstate.poisoned)) {
-				System.out.println("forager is in DANGER");
+//				System.out.println("forager is in DANGER");
 				this.setIsalive(false);
 				// ruche.getlForager().remove(this);
 				target.setIsalive(false); // fleur est mort
 			} else {
-				System.out.println("forager is collecting");
+//				System.out.println("forager is collecting");
 				int collected = this.target.decrementerPollen();
 				this.setPollen(collected + pollen);
 				// this.pollen += collected;
 				// target.setPollen(target.getPollen() - collected); // c'est deux fois
 				if (this.pollen >= Application.MaxNectar || collected == 0) {
 					this.state = foragerState.wayback;
-					System.out.println("forager state is:" + this.state);
+//					System.out.println("forager state is:" + this.state);
 					this.setTarget(null);
 				}
 
@@ -207,21 +205,21 @@ public class Forager extends Bees {
 		case wayback:
 			if (this.moveTo(this.ruche.getPositionHiveDoor())) {
 				this.state = foragerState.storing;
-				System.out.println("forager state is:" + this.state);
+//				System.out.println("forager state is:" + this.state);
 			}
 			break;
 
 		case storing:
-			System.out.println("forager is storing, her number of pollen is: " + this.pollen);
+//			System.out.println("forager is storing, her number of pollen is: " + this.pollen);
 			int toStore = Math.min(Application.nectarPerFrame, this.pollen);
-			System.out.println("int toStore is: " + toStore);
+//			System.out.println("int toStore is: " + toStore);
 			// this.pollen -= toStore;
 			setPollen(pollen - toStore);
 			this.ruche.setPollen(this.ruche.getPollen() + toStore);
-			System.out.println("ruche pollen is: " + this.ruche.getPollen());
+//			System.out.println("ruche pollen is: " + this.ruche.getPollen());
 			if (this.pollen == 0) {
 				this.state = foragerState.lookfor;
-				System.out.println("forager state is:" + this.state);
+//				System.out.println("forager state is:" + this.state);
 			}
 			break;
 		}

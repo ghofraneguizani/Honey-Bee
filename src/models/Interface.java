@@ -112,7 +112,6 @@ public class Interface extends JFrame implements Runnable {
 
 
 		for (int i = 0; i < a.ruche.lForagerMorts.size(); i++) {
-			System.out.println("in the loop for dead bees : " + a.ruche.lForagerMorts.size() + " / " + i);
 			g2.drawImage((Image) imgvieu.getImage(), a.ruche.lForagerMorts.get(i).getPosition().x,
 					a.ruche.lForagerMorts.get(i).getPosition().y, 30, 30, null);
 		}
@@ -155,16 +154,17 @@ public class Interface extends JFrame implements Runnable {
 		
 		
 		for (int i = 0; i < a.ruche.lForager.size(); i++) {
-			// System.out.println("painting bees, position test : " +
+//			 System.out.println("painting bees, position test : " + a.getRuche().getPositionHiveDoor().getX());
 			// a.ruche.lForager.get(i).getPosition() +" / " + a.ruche.positionHiveDoor);
-			// if (a.ruche.lForager.get(i).getPosition().equals(a.ruche.positionHiveDoor)) {
-			// System.out.println("in the pool, but at the door");
-			//
-			// } else {
+			if (a.ruche.lForager.get(i).getPosition().x == 612
+					&& a.ruche.lForager.get(i).getPosition().y == 395) {
+//				System.out.println("in the hive");
 
-			g2.drawImage((Image) img.getImage(), a.ruche.lForager.get(i).getPosition().x,
-					a.ruche.lForager.get(i).getPosition().y, null);
-			// }
+			} else {
+
+				g2.drawImage((Image) img.getImage(), a.ruche.lForager.get(i).getPosition().x,
+						a.ruche.lForager.get(i).getPosition().y, null);
+			}
 
 		}
 		a.nextFrame();

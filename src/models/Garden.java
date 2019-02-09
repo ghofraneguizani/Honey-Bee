@@ -146,7 +146,7 @@ public class Garden {
 			if (fleurs.get(i).getPollen() == 0) {
 				fleurs.get(i).setIsalive(false);
 			}
-			System.out.println("Pollen:" + fleurs.get(i).getPollen());
+//			System.out.println("Pollen:" + fleurs.get(i).getPollen());
 		}
 		for (int i = fleurs.size() - 1; i >= 0; i--) {
 			if (!fleurs.get(i).isIsalive()) {
@@ -154,7 +154,7 @@ public class Garden {
 				fleurs.remove(fleurs.get(i));
 			}
 		}
-		System.out.println("number of existing flowers:" + fleurs.size());
+//		System.out.println("number of existing flowers:" + fleurs.size());
 	
 		if (this.getFleurs().size() == 0) {
 			System.out.println("number of foragers in the game: " + this.ruche.getForagersAtAll());

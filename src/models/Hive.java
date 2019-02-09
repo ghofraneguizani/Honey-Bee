@@ -26,7 +26,7 @@ public class Hive {
 		pollen = 0;
 		this.garden = garden;
 		this.positionHive = positionHive;
-		this.positionHiveDoor = positionHive;
+		this.positionHiveDoor = new Point(positionHive);
 		positionHiveDoor.setLocation(positionHiveDoor.getX()+20, positionHiveDoor.getY()+60);
 		queen = new Queen(this);
 	}
@@ -114,7 +114,7 @@ public class Hive {
 	public void nextFrame() {
 		System.out.println("we are in the Hive");
 		queen.nextFrame(); // nouvelle abeille
-		System.out.println("number of foragers (before loop): " + lForager.size());
+//		System.out.println("number of foragers (before loop): " + lForager.size());
 
 		// int counter = 1;
 		for (Forager forager : lForager) {
@@ -137,8 +137,8 @@ public class Hive {
 				// l'abeille meurt
 			}
 		}
-		System.out.println("number of foragers (after loop): " + lForager.size());
-		System.out.println("collected Pollen: " + this.pollen);
+//		System.out.println("number of foragers (after loop): " + lForager.size());
+//		System.out.println("collected Pollen: " + this.pollen);
 		
 		
 	}
