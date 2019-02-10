@@ -1,6 +1,5 @@
 package ihm;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,12 +18,9 @@ import java.awt.Color;
 
 public class AideFenetre extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private final JLabel lblNewLabel = new JLabel("");
 
-	/**
-	 * Create the frame.
-	 */
 	public AideFenetre() {
 		setVisible(true);
 		setResizable(false);
@@ -41,6 +37,7 @@ public class AideFenetre extends JFrame {
 		panel.setBounds(0, 0, 1184, 671);
 		contentPane.add(panel);
 
+		// le bouton pour revenir au menu
 		JButton btnNewButton = new JButton();
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setFocusPainted(false);
@@ -64,6 +61,7 @@ public class AideFenetre extends JFrame {
 		btnNewButton.setFont(new Font("Ancient", Font.PLAIN, 40));
 		panel.add(btnNewButton);
 
+		// courte description du jeu
 		JLabel lblNewLabel_3 = new JLabel("About the Game :");
 		lblNewLabel_3.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel_3.setOpaque(true);
@@ -71,18 +69,7 @@ public class AideFenetre extends JFrame {
 		lblNewLabel_3.setForeground(Color.MAGENTA);
 		lblNewLabel_3.setBounds(630, 130, 200, 29);
 		panel.add(lblNewLabel_3);
-		/*
-		 * JLabel lblMort = new JLabel("Mort :");
-		 * lblMort.setVerticalAlignment(SwingConstants.TOP);
-		 * lblMort.setForeground(Color.BLACK); lblMort.setFont(new Font("Ancient",
-		 * Font.PLAIN, 30)); lblMort.setBounds(659, 338, 65, 29); panel.add(lblMort);
-		 * 
-		 * JLabel lblLeGagnant = new JLabel("Le Gagnant :");
-		 * lblLeGagnant.setVerticalAlignment(SwingConstants.TOP);
-		 * lblLeGagnant.setForeground(Color.BLACK); lblLeGagnant.setFont(new
-		 * Font("Ancient", Font.PLAIN, 30)); lblLeGagnant.setBounds(630, 447, 123, 29);
-		 * panel.add(lblLeGagnant);
-		 */
+
 		JLabel lbl1 = new JLabel("This game simulates the life of bees and how they collect");
 		lbl1.setVerticalAlignment(SwingConstants.TOP);
 		lbl1.setForeground(Color.BLACK);
@@ -114,16 +101,6 @@ public class AideFenetre extends JFrame {
 		lblb3.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblb3.setBounds(549, 245, 420, 29);
 		panel.add(lblb3);
-
-		/*
-		 * JLabel lblUnCombattantEst_1 = new
-		 * JLabel("Un combattant est mort s'il rentre en collision avec ");
-		 * lblUnCombattantEst_1.setVerticalAlignment(SwingConstants.TOP);
-		 * lblUnCombattantEst_1.setForeground(Color.BLACK);
-		 * lblUnCombattantEst_1.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		 * lblUnCombattantEst_1.setBounds(449, 365, 311, 29);
-		 * panel.add(lblUnCombattantEst_1);
-		 */
 
 		JLabel lbl3 = new JLabel(" How to Play :");
 		lbl3.setVerticalAlignment(SwingConstants.TOP);
@@ -183,31 +160,10 @@ public class AideFenetre extends JFrame {
 		lbl4s.setBounds(549, 455, 420, 29);
 		panel.add(lbl4s);
 
-		/*
-		 * JLabel lbln = new
-		 * JLabel("When all the nectar has been collected, or when there are \n no more bees, the game ends."
-		 * ); lbln.setVerticalAlignment(SwingConstants.TOP); lbln.setOpaque(true);
-		 * lbln.setForeground(Color.BLACK); lbln.setFont(new Font("Times New Roman",
-		 * Font.PLAIN, 18)); lbln.setBounds(549, 485, 420, 29); lbln.add(lbln);
-		 * 
-		 * /*JLabel lblLeSeulClan = new
-		 * JLabel("When all the nectar has been collected, or when there are no more bees, the game ends. "
-		 * ); lblLeSeulClan.setVerticalAlignment(SwingConstants.TOP);
-		 * lblLeSeulClan.setForeground(Color.BLACK); lblLeSeulClan.setFont(new
-		 * Font("Times New Roman", Font.PLAIN, 18)); lblLeSeulClan.setBounds(449, 487,
-		 * 349, 29); panel.add(lblLeSeulClan);
-		 * 
-		 * JLabel lblSignifie = new JLabel("> : signifie plus fort que");
-		 * lblSignifie.setVerticalAlignment(SwingConstants.TOP);
-		 * lblSignifie.setForeground(Color.BLACK); lblSignifie.setFont(new
-		 * Font("Times New Roman", Font.PLAIN, 18)); lblSignifie.setBounds(449, 424,
-		 * 311, 29); panel.add(lblSignifie);
-		 * 
-		 */
-
+		// image de fond
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setOpaque(true);
-		icon = new ImageIcon("img/26337149-illustration-of-a-bee-above-the-stump-and-a-tree-with-a-beehive.jpg");
+		icon = new ImageIcon("img/backgroundFenetres.jpg");
 		newimg = icon.getImage().getScaledInstance(1184, 671, java.awt.Image.SCALE_SMOOTH);
 		icon = new ImageIcon(newimg);
 		lblNewLabel.setIcon(icon);

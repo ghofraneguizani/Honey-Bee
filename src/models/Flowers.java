@@ -1,12 +1,6 @@
 package models;
 
 import java.awt.Point;
-import java.util.Arrays;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
 
 public class Flowers {
 	private Point position;
@@ -44,12 +38,6 @@ public class Flowers {
 		super();
 		this.position = position;
 		this.state = Flowerstate.normal;
-	}
-
-	public Flowers(Point position, Flowerstate state) {
-
-		this.position = position;
-		this.state = state;
 	}
 
 	public Flowerstate getState() {
@@ -92,22 +80,12 @@ public class Flowers {
 		this.imagePath = imagePath;
 	}
 
-	public static Flowerstate getFirststate() {
-		List<Flowerstate> Values = Collections.unmodifiableList(Arrays.asList(Flowerstate.values()));
-		Random rand = new Random();
-		int n = rand.nextInt(Values.size());
-		return Values.get(n);
-	}
-
+	// Méthode pour réduire le pollen de la fleur récoltée par les abeilles
 	public int decrementerPollen() { // decremente le nombre de pollen d'une fleur d'un nombre "cap"= capacite d'une
 										// abeille
 		int toStore = Math.min(Application.nectarPerFrame, this.pollen);
 		this.pollen -= toStore;
 		return toStore;
-
-		/*
-		 * int y = getPollen(); if(y>0 ){ setPollen( y-cap); }
-		 */
 
 	}
 

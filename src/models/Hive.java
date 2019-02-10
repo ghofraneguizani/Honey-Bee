@@ -12,10 +12,11 @@ public class Hive {
 	protected Garden garden;
 	protected Point positionHive;
 	protected Point positionHiveDoor;
-	private Queen queen; // pour les abeilles
+	private Queen queen;
 
 	private int foragersAtAll;
 	private static final int foragerLiveTime = 100;
+	private static final int foragerDeathTime = 100;
 
 	public Hive() {
 		lForager = new ArrayList<>();
@@ -27,7 +28,7 @@ public class Hive {
 		this.garden = garden;
 		this.positionHive = positionHive;
 		this.positionHiveDoor = new Point(positionHive);
-		positionHiveDoor.setLocation(positionHiveDoor.getX()+20, positionHiveDoor.getY()+60);
+		positionHiveDoor.setLocation(positionHiveDoor.getX() + 20, positionHiveDoor.getY() + 60);
 		queen = new Queen(this);
 	}
 
@@ -76,71 +77,76 @@ public class Hive {
 	}
 
 	public void setlForager(List<Forager> lForager) {
-		this.lForager = lForager;
+		Hive.lForager = lForager;
 	}
 
 	public void incrementerPollen(int cap) {
 		setPollen(getPollen() + cap);
 	}
 
+	// Méthode pour varier l'âge des abeilles au début du jeu
 	public int getRandomLiveTime() {
 		Random rand = new Random();
-		int output = rand.nextInt((int)foragerLiveTime/3);
+		int output = rand.nextInt((int) foragerLiveTime / 3);
 		return output;
 	}
 
+	// Méthode pour créer les abeilles au début du jeu
 	public void createForagers(int nbBees) {
-//		System.out.println("in the Hive, creating foragers");
-		// Flowers fleur = new Flowers();
 
 		for (int i = 0; i < nbBees; i++) {
 			int liveTime = this.getRandomLiveTime();
-			// fleur = findFlower();
-			Forager f = new Forager(null, new Point(positionHiveDoor), this, liveTime,"img/icons8-abeille-48.png");
-			//Forager f = new Forager(null,new Point(positionHive),this, liveTime,
-			System.out.println(f);
+			Forager f = new Forager(null, new Point(positionHiveDoor), this, liveTime);
 			lForager.add(f);
 			foragersAtAll++;
 		}
+		for (Forager f : lForager) {
+			System.out.println(f);
+		}
 	}
 
+	// Méthode pour trouver une fleur pour l'abeille sur laquelle elle vole pour
+	// collecter le pollen
 	public Flowers findFlower() {// algo qui va retourner la position des fleurs
 		int taille = Garden.fleurs.size();
 		Random rand = new Random();
-		int n = rand.nextInt(taille); 
+		int n = rand.nextInt(taille);
 		return Garden.fleurs.get(n);
 	}
 
 	public void nextFrame() {
-		System.out.println("we are in the Hive");
-		queen.nextFrame(); // nouvelle abeille
-//		System.out.println("number of foragers (before loop): " + lForager.size());
+		queen.nextFrame();
 
-		// int counter = 1;
 		for (Forager forager : lForager) {
 			if (forager.isalive == true) {
 				forager.nextFrame();
 			}
-			// counter++;
 		}
+		// supprimer les abeilles mortes (mortes au combat) de la liste des abeilles
+		// vivantes et les ajouter à la liste des abeilles mortes
 		for (int i = lForager.size() - 1; i >= 0; i--) {
 			if (lForager.get(i).isalive == false) {
 				this.getlForagerMorts().add(lForager.get(i));
 				this.getlForager().remove(lForager.get(i));
 			}
 		}
+		// supprimer les abeilles mortes (mourantes de vieillesse) de la liste des
+		// abeilles vivantes et les ajouter à la liste des abeilles mortes
 		for (int i = lForager.size() - 1; i >= 0; i--) {
-			lForager.get(i).setLiveTime(lForager.get(i).getLiveTime() + 1); // l'abeille vieillit
+			lForager.get(i).setLiveTime(lForager.get(i).getLiveTime() + 1);
 			if (lForager.get(i).getLiveTime() >= foragerLiveTime) {
 				this.getlForagerMorts().add(lForager.get(i));
-				this.getlForager().remove(lForager.get(i)); 
-				// l'abeille meurt
+				this.getlForager().remove(lForager.get(i));
 			}
 		}
-//		System.out.println("number of foragers (after loop): " + lForager.size());
-//		System.out.println("collected Pollen: " + this.pollen);
-		
-		
+		//	supprimer les abeilles mortes de la liste si elles sont pourries
+		for (int i = lForagerMorts.size() -1; i >= 0; i--) {
+			lForagerMorts.get(i).setDeathTime(lForagerMorts.get(i).getDeathTime() + 1);
+			if (lForagerMorts.get(i).getDeathTime() >= foragerDeathTime) {
+				this.getlForagerMorts().remove(lForagerMorts.get(i));
+			}
+		}
+
 	}
 
 }
